@@ -34,11 +34,23 @@ public class Blockchain {
     //create a new block with data set to data
     public void addData(String data){
         //Create a new block and set all initial variables
+        String lastHash = theChain.get(length()).getHash();
+        int newId = length() + 1;
+
+        Block addBlock = new Block(newId, data, lastHash);
+        addBlock.generateHash();
 
         //modify salt until we get a salt such that after hashing
         //the hash value starts with 00
+        while ((addBlock.getHash()).substring(0,2) != "00"){
+
+            addBlock.setSalt(BlockUtils.int2bytes(5));
+            System.out.println("Hash Found:");
+            System.out.println(addBlock.getHash());
+        }
 
         //when a valid salt is found add block to the chain
+        theChain.add(addBlock);
     }
 }
 

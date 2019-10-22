@@ -16,7 +16,9 @@ public class Block {
     //The salt is created as 8 bytes with only zeros
     //After assigning values the hash is calculated
     public Block(int id, String blockData, String inHash){
-
+        counter = id;
+        data = blockData;
+        prevHash = inHash;
     }
 
     //Print a block, by printing all its attributes
@@ -47,9 +49,10 @@ public class Block {
     public void generateHash(){
         //create the input to the hashfunction as the concatenation of the following attributes written as strings
         //counter, prevHash, data, salt
+        String input = BlockUtils.bytes2hexString(BlockUtils.int2bytes(counter)) + prevHash + data + BlockUtils.bytes2hexString(salt);
 
         //input to the hashfunction and store in hash
-
+        hash = BlockUtils.hash(input);
     }
 
     //return the data in the block

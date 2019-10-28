@@ -80,6 +80,14 @@ public class Block {
         generateHash();
     }
 
+    public void setData (String newData){
+        data = newData;
+    }
+
+    public void setPreviousHash (String newPrevHash){
+        prevHash = newPrevHash;
+    }
+
 }
 
 

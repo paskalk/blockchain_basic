@@ -4,6 +4,12 @@ import java.util.ArrayList;
 public class Blockchain {
     //The blockchain is implemented as an ArrayList with blocks
     private ArrayList<Block> theChain;
+    private long startTime = 0;
+    private long totalTime = 0;
+    private int totalSeeds = 0;
+    private String numberOfZeros = "0";
+    private int loopCount = 5;
+
 
     //Create a new blockchain and set the starting block
     public Blockchain(){
@@ -61,13 +67,84 @@ public class Blockchain {
         //modify salt until we get a salt such that after hashing
         //the hash value starts with 00
         int seed = 0;
-        while (!((newBlock.getHash()).substring(0,2)).equals("00")){
+        startTimer();
+        while (!((newBlock.getHash()).substring(0,numberOfZeros.length())).equals(numberOfZeros)){
             seed += 1;
             newBlock.setSalt(seed);
         }
 
+        totalTime = totalTime + stopTimer();
+        totalSeeds = totalSeeds + seed;
+
         //when a valid salt is found add block to the chain
         theChain.add(newBlock);
+    }
+
+    //modify Block: 2 and by simply setting data
+    public void simpleDataAssignment(){
+        getBlock(1).setData("Injected Data");
+    }
+
+    //modify Block: 2 by modifying data, salt & hashvalue
+    public void improvedAttack(){
+        Block blockToModify = getBlock(1);
+        blockToModify.setData("Injected Data");
+
+        blockToModify.generateHash();
+
+        int seed = 0;
+        while (!((blockToModify.getHash()).substring(0,2)).equals("00")){
+            seed += 1;
+            blockToModify.setSalt(seed);
+        }
+    }
+
+    //modify Block: 2 (& subsequent blocks) by modifying data, salt, hashvalue & previous hashvalue in next block
+    public void succesfulAttack(int positionToModify){
+
+        //Update modified block first
+        Block blockToModify = getBlock(positionToModify);
+        blockToModify.setData("Injected Data");
+
+        blockToModify.generateHash();
+
+        int seed = 0;
+        while (!((blockToModify.getHash()).substring(0, 2)).equals("00")) {
+            seed += 1;
+            blockToModify.setSalt(seed);
+        }
+
+        for (int i=positionToModify+1; i < length();i++) {
+            getBlock(i).setPreviousHash(getBlock(i-1).getHash());
+
+            getBlock(i).generateHash();
+            int innerSeed = 0;
+            while (!((getBlock(i).getHash()).substring(0, 2)).equals("00")) {
+                innerSeed += 1;
+                getBlock(i).setSalt(innerSeed);
+            }
+
+        }
+    }
+
+    //Record current start time
+    public void startTimer(){
+        startTime = System.currentTimeMillis();
+    }
+
+    //Get time difference between the start and end time (in milliseconds)
+    public long stopTimer(){
+        return (System.currentTimeMillis() - startTime);
+    }
+
+    public void results(){
+        System.out.println("Average seeds: " + totalSeeds/loopCount);
+        System.out.println("Average Time: " + (totalTime/loopCount)) ;
+    }
+
+    public void setZeros(String zeros, int divideBy){
+        numberOfZeros = zeros;
+        loopCount = divideBy;
     }
 }
 

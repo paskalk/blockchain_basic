@@ -71,7 +71,7 @@
       <workItem from="1570615945491" duration="87557000" />
       <workItem from="1571747622352" duration="13230000" />
       <workItem from="1572178682264" duration="1663000" />
-      <workItem from="1572269074181" duration="15477000" />
+      <workItem from="1572269074181" duration="31490000" />
     </task>
     <task id="LOCAL-00001" summary="Modified the hash function and salt tweaker..">
       <created>1571768673813</created>
@@ -121,23 +121,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Blockchain.java</url>
-          <line>53</line>
-          <option name="timeStamp" value="68" />
+          <line>116</line>
+          <option name="timeStamp" value="84" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Blockchain.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="75" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Blockchain.java</url>
-          <line>33</line>
-          <option name="timeStamp" value="76" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Blockchain.java</url>
-          <line>41</line>
-          <option name="timeStamp" value="77" />
+          <line>70</line>
+          <option name="timeStamp" value="89" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

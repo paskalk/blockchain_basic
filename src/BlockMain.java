@@ -39,6 +39,25 @@ public class BlockMain {
         System.out.println("Welcome to my simple Blockchain");
         //init the blockchain
         Blockchain chain = new Blockchain();
+
+        chain.setZeros("000000", 5);
+
+        //Create blockchain with 5 blocks
+        for (int i=1; i<6; i++){
+            chain.addData("#"+i+i+i);
+        }
+
+        chain.results();
+
+//        //simple Data Modification
+//        chain.simpleDataAssignment();
+
+//        //improved attack my modifying data, salt & hash
+//        chain.improvedAttack();
+
+//        //Succesfull attack
+//        chain.succesfulAttack(1);
+
         //run the main loop
         boolean stop = false;
         Scanner in = new Scanner(System.in);

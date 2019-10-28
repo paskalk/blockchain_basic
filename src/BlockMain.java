@@ -55,7 +55,7 @@ public class BlockMain {
                     //verify the blockchain and print status
                     boolean status = chain.verify();
                     if(status){
-                        System.out.println("The chain s valid");
+                        System.out.println("The chain is valid");
                     }
                     else {
                         System.out.println("The chain contains some errors");

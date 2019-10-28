@@ -19,6 +19,7 @@ public class Block {
         counter = id;
         data = blockData;
         prevHash = inHash;
+        salt = BlockUtils.int2bytes(00000000000000000000000000000000);
     }
 
     //Print a block, by printing all its attributes
@@ -40,8 +41,14 @@ public class Block {
     //verify that the hash of the content equals the stored hash
     public boolean verify(){
         //Hash the attributes of the block (counter, prevHash, data, salt)
+        String input = BlockUtils.bytes2hexString(BlockUtils.int2bytes(counter)) + prevHash + data + BlockUtils.bytes2hexString(salt);
+        String regeneratedHash = BlockUtils.hash(input);
         //compare the output from the Hashfunction with the stored hash
-        return true;
+        if(regeneratedHash.equals(hash)){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
@@ -65,9 +72,11 @@ public class Block {
     public String getPrevHash(){return prevHash;}
 
     //set new salt value and update the hash to take new salt into account
-    public void setSalt(byte[] newSalt){
-        for(int i=0;i<8;++i)
-            salt[i]=newSalt[i];
+    public void setSalt(int newSalt){
+//        for(int i=0;i< salt.length;++i)
+//            salt[i]=newSalt[i];
+
+        salt = BlockUtils.int2bytes(newSalt);
         generateHash();
     }
 
